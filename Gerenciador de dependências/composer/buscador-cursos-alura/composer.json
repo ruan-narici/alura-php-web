@@ -1,0 +1,13 @@
+{
+    "name": "ruan-narici/buscador-cursos",
+    "description": "Projeto que busca os cursos no site da Alura",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ruan Narici",
+            "email": "ruannarici@hotmail.com"
+        }
+    ],
+    "require": {}
+}
