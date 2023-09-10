@@ -5,9 +5,10 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "Ruan Narici",
-            "email": "ruannarici@hotmail.com"
+            "name": "Ruan Narici"
         }
     ],
-    "require": {}
+    "require": {
+        "guzzlehttp/guzzle": "^7.8"
+    }
 }
