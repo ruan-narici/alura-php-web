@@ -1,7 +1,6 @@
 <?php
 
 require_once 'vendor/autoload.php';
-require_once 'src/Buscador.php';
 
 use GuzzleHttp\Client;
 use ruannarici\BuscadorDeCursos\Buscador;
@@ -16,6 +15,5 @@ $cursos = $buscador->buscar();
 foreach($cursos as $curso) {
     echo $curso . PHP_EOL;
 }
-
 
 ?>
