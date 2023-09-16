@@ -1,4 +1,7 @@
 <?php
+use ruannarici\Pdo\Domain\Model\Student;
+
+require_once 'vendor/autoload.php';
 
 $databasePath = __DIR__ . '/BancoDeDados.sqlite';
 
@@ -10,7 +13,18 @@ SELECT *
 ";
 
 $result = $connection->query($sqlSelect);
-$studentsList = $result->fetchAll();
-echo var_dump($studentsList);
+$studentsDataList = $result->fetchAll(PDO::FETCH_ASSOC);
+$studentsList = [];
+
+foreach($studentsDataList as $studentData) {
+    $student = new Student(
+        $studentData['id'],
+        $studentData['name'],
+        new DateTimeImmutable($studentData['birthDate'])
+    );
+    array_push($studentsList, $student);
+}
+
+var_dump($studentsList);
 
 ?>
