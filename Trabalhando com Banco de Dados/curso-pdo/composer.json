@@ -1,0 +1,12 @@
+{
+    "name": "ruannarici/pdo",
+    "description": "Projeto desenvolvido durante o curso da Alura sobre PDO, SQLITE e MySQL",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "ruannarici\\Pdo\\": "src/"
+        }
+    },
+    "require": {}
+}
