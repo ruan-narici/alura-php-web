@@ -1,6 +1,8 @@
 <?php
 
-$conexao = new PDO("sqlite:BancoDeDados.sqlite");
+$caminhoArquivoBanco = __DIR__ . '/BancoDeDados.sqlite';
+
+$conexao = new PDO('sqlite:' . $caminhoArquivoBanco);
 
 echo "Conectei" . PHP_EOL;
 
