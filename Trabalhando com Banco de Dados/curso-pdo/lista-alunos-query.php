@@ -1,6 +1,7 @@
 <?php
 use ruannarici\Pdo\Domain\Model\Student;
 use ruannarici\Pdo\Infrastructure\Persistence\ConnectionCreator;
+use ruannarici\Pdo\Infrastructure\Repository\PdoStudentRepository;
 
 require_once 'vendor/autoload.php';
 
@@ -24,6 +25,9 @@ foreach($studentsDataList as $studentData) {
     array_push($studentsList, $student);
 }
 
-var_dump($studentsList);
+// var_dump($studentsList);
+
+$pdoStudentRepository = new PdoStudentRepository();
+var_dump($pdoStudentRepository->findAll());
 
 ?>
