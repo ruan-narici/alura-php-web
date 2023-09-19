@@ -10,8 +10,8 @@ use ruannarici\Pdo\Infrastructure\Persistence\ConnectionCreator;
 
 class PdoStudentRepository implements StudentRepository {
     private $pdo;
-    public function __construct() {
-        $this->pdo = ConnectionCreator::createConnection();
+    public function __construct(PDO $pdo) {
+        $this->pdo = $pdo;
     }
 
     public function findAll(): array {

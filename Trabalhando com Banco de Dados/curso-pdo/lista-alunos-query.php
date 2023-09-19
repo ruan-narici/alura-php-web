@@ -27,7 +27,7 @@ foreach($studentsDataList as $studentData) {
 
 // var_dump($studentsList);
 
-$pdoStudentRepository = new PdoStudentRepository();
+$pdoStudentRepository = new PdoStudentRepository($connection);
 var_dump($pdoStudentRepository->findAll());
 
 ?>
