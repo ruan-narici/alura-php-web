@@ -6,7 +6,7 @@ require_once 'vendor/autoload.php';
 
 $databasePath = __DIR__ . '/BancoDeDados.sqlite';
 
-$connection = new PDO('sqlite:' . $databasePath);
+$pdo = new PDO('sqlite:' . $databasePath);
 
 $student = new Student(
     null,
@@ -14,12 +14,25 @@ $student = new Student(
     new DateTimeImmutable('1998-07-30')
 );
 
+// $sqlInsert = "
+// INSERT INTO students
+//     (name, birthDate)
+// VALUES ('{$student->getName()}','{$student->getBirthDate()->format('Y-m-d')}');
+// ";
+
+// Evitando SQL Injection
 $sqlInsert = "
 INSERT INTO students
     (name, birthDate)
-VALUES ('{$student->getName()}','{$student->getBirthDate()->format('Y-m-d')}');
+VALUES (:name, :birthDate);
 ";
 
-var_dump($connection->exec($sqlInsert));
+$statement = $pdo->prepare($sqlInsert);
+$statement->bindValue(':name', $student->getName());
+$statement->bindValue(':birthDate', $student->getBirthDate()->format('Y-m-d'));
+$statement->execute();
+
+
+// var_dump($pdo->exec($sqlInsert));
 
 ?>
