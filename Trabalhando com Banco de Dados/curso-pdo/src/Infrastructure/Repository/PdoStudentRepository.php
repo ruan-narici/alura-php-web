@@ -46,6 +46,21 @@ class PdoStudentRepository implements StudentRepository {
         $prepareStatement = $this->pdo->prepare($sql);
         $prepareStatement->bindValue(':name', $student->getName());
         $prepareStatement->bindValue(':birthDate', $student->getBirthDate()->format('Y-m-d'));
+        $success = $prepareStatement->execute();
+
+        if ($success) {
+            $student->setId($this->pdo->lastInsertId());
+        }
+
+        return $success;
+    }
+
+    public function update(Student $student): bool {
+        $sql = "UPDATE students SET name = ':name', birthDate = ':birthDate' WHERE id = ':id';" ;
+        $prepareStatement = $this->pdo->prepare($sql);
+        $prepareStatement->bindValue(':name', $student->getName());
+        $prepareStatement->bindValue(':birthDate', $student->getBirthDate()->format('Y-m-d'));
+        $prepareStatement->bindValue(':id', $student->getId());
         return $prepareStatement->execute();
     }
 

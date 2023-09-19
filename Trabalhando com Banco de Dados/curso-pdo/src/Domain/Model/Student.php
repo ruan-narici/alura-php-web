@@ -20,12 +20,24 @@ class Student {
         return $this->id;
     }
 
+    public function setId(int $id): void {
+        $this->id = $id;
+    }
+
     public function getName(): string {
         return $this->name;
     }
 
+    public function setName(string $name): void {
+        $this->name = $name;
+    }
+
     public function getBirthDate(): DateTimeImmutable {
         return $this->birthDate;
+    }
+
+    public function setBirthDate(DateTimeImmutable $birthDate): void {
+        $this->birthDate = $birthDate;
     }
 
     public function age(): int {
