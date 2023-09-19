@@ -1,8 +1,10 @@
 <?php
 
-$databasePath = __DIR__ . '/BancoDeDados.sqlite';
+use ruannarici\Pdo\Infrastructure\Persistence\ConnectionCreator;
 
-$connection = new PDO('sqlite:' . $databasePath);
+require_once 'vendor/autoload.php';
+
+$connection = ConnectionCreator::createConnection();
 
 echo "Conectei" . PHP_EOL;
 

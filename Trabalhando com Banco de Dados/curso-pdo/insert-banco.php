@@ -1,12 +1,11 @@
 <?php
 
 use ruannarici\Pdo\Domain\Model\Student;
+use ruannarici\Pdo\Infrastructure\Persistence\ConnectionCreator;
 
 require_once 'vendor/autoload.php';
 
-$databasePath = __DIR__ . '/BancoDeDados.sqlite';
-
-$pdo = new PDO('sqlite:' . $databasePath);
+$pdo = $connection = ConnectionCreator::createConnection();
 
 $student = new Student(
     null,

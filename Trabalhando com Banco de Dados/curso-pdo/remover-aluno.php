@@ -1,12 +1,10 @@
 <?php
 
-use ruannarici\Pdo\Domain\Model\Student;
+use ruannarici\Pdo\Infrastructure\Persistence\ConnectionCreator;
 
 require_once 'vendor/autoload.php';
 
-$databasePath = __DIR__ . '/BancoDeDados.sqlite';
-
-$pdo = new PDO('sqlite:' . $databasePath);
+$pdo = $connection = ConnectionCreator::createConnection();
 
 $sqlDelete = "
 DELETE FROM students 
@@ -14,7 +12,7 @@ DELETE FROM students
 ";
 
 $prepareStatement = $pdo->prepare($sqlDelete);
-$prepareStatement->bindValue(':id', 2, PDO::PARAM_INT);
+$prepareStatement->bindValue(':id', 5, PDO::PARAM_INT);
 
 $prepareStatement->execute();
 
