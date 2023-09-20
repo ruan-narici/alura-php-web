@@ -25,7 +25,7 @@ $estudante2 = new Student(
 );
 
 $pdo->save($estudante1);
-// $pdo->save($estudante2);
+$pdo->save($estudante2);
 
 $connection->commit();
 

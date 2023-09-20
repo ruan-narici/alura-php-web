@@ -12,7 +12,7 @@ DELETE FROM students
 ";
 
 $prepareStatement = $pdo->prepare($sqlDelete);
-$prepareStatement->bindValue(':id', 5, PDO::PARAM_INT);
+$prepareStatement->bindValue(':id', 6, PDO::PARAM_INT);
 
 $prepareStatement->execute();
 
