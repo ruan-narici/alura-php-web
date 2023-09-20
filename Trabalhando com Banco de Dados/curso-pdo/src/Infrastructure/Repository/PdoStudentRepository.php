@@ -29,7 +29,7 @@ class PdoStudentRepository implements StudentRepository {
     }
 
     public function findBirthAt(DateTimeImmutable $birthDate): array {
-        $sql = "SELECT * FROM students WHERE birthDate = ':birthDate'";
+        $sql = "SELECT * FROM students WHERE birthDate = :birthDate";
         $statement = $this->pdo->query($sql);
         $result = $statement->fetchAll(PDO::FETCH_ASSOC);
         $students = [];
@@ -42,7 +42,7 @@ class PdoStudentRepository implements StudentRepository {
     }
 
     public function save(Student $student): bool {
-        $sql = "INSERT INTO students (name, birthDate) VALUES (':name', ':birthDate');";
+        $sql = "INSERT INTO students (name, birthDate) VALUES (:name, :birthDate);";
         $prepareStatement = $this->pdo->prepare($sql);
         $prepareStatement->bindValue(':name', $student->getName());
         $prepareStatement->bindValue(':birthDate', $student->getBirthDate()->format('Y-m-d'));
@@ -56,7 +56,7 @@ class PdoStudentRepository implements StudentRepository {
     }
 
     public function update(Student $student): bool {
-        $sql = "UPDATE students SET name = ':name', birthDate = ':birthDate' WHERE id = ':id';" ;
+        $sql = "UPDATE students SET name = :name, birthDate = :birthDate WHERE id = :id;" ;
         $prepareStatement = $this->pdo->prepare($sql);
         $prepareStatement->bindValue(':name', $student->getName());
         $prepareStatement->bindValue(':birthDate', $student->getBirthDate()->format('Y-m-d'));
@@ -65,7 +65,7 @@ class PdoStudentRepository implements StudentRepository {
     }
 
     public function remove(Student $student): bool {
-        $sql = "DELETE FROM students WHERE name = ':name' AND birthDate = ':birthDate';";
+        $sql = "DELETE FROM students WHERE name = :name AND birthDate = :birthDate;";
         $prepareStatement = $this->pdo->prepare($sql);
         $prepareStatement->bindValue(':name', $student->getName());
         $prepareStatement->bindValue(':birthDate', $student->getBirthDate()->format('Y-m-d'));
