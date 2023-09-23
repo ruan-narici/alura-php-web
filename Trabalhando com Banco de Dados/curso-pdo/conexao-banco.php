@@ -8,14 +8,26 @@ $connection = ConnectionCreator::createConnection();
 
 echo "Conectei" . PHP_EOL;
 
-$sql = "
+// $sqlAddPhoneTemp = "INSERT INTO phones (area_code, number, student_id) VALUES ('77','99999-9999',1)";
+// $connection->exec($sqlAddPhoneTemp);
+// exit();
+
+$createTableSql = "
 CREATE TABLE IF NOT EXISTS students (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL,
     birthDate TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS phones (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    area_code TEXT,
+    number TEXT,
+    student_id INTEGER,
+    FOREIGN KEY (student_id) REFERENCES students(id)
 )
 ";
 
-$connection->exec($sql);
+$connection->exec($createTableSql);
 
 ?>

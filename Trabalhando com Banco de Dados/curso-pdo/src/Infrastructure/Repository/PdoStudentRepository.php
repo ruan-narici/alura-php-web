@@ -4,6 +4,7 @@ namespace ruannarici\Pdo\Infrastructure\Repository;
 
 use DateTimeImmutable;
 use PDO;
+use ruannarici\Pdo\Domain\Model\Phone;
 use ruannarici\Pdo\Domain\Model\Student;
 use ruannarici\Pdo\Domain\Repository\StudentRepository;
 use ruannarici\Pdo\Infrastructure\Persistence\ConnectionCreator;
@@ -14,6 +15,23 @@ class PdoStudentRepository implements StudentRepository {
         $this->pdo = $pdo;
     }
 
+    private function fillPhoneOf(Student $student): void {
+        $sql = "SELECT * FROM phones WHERE id = :id";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindParam(':id', $student->getId(), PDO::PARAM_INT);
+        $stmt->execute();
+        $phoneDataList = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        foreach( $phoneDataList as $phoneData ) {
+            $phone = new Phone(
+                $phoneData['id'], 
+                $phoneData['area_code'], 
+                $phoneData['number']
+            );
+
+            $student->addPhone($phone);
+        }
+    }
+
     public function findAll(): array {
         $sql = "SELECT * FROM students";
         $statement = $this->pdo->query($sql);
@@ -22,6 +40,7 @@ class PdoStudentRepository implements StudentRepository {
 
         foreach($result as $row) {
             $student = new Student($row['id'], $row['name'], new DateTimeImmutable($row['birthDate']));
+            $this->fillPhoneOf($student);
             array_push($students, $student);
         }
 

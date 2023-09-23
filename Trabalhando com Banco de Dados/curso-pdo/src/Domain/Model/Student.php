@@ -9,6 +9,8 @@ class Student {
     private ?int $id;
     private string $name;
     private DateTimeImmutable $birthDate;
+    /** @var Phone[] */
+    private array $phones = [];
 
     public function __construct(?int $id, string $name, DateTimeImmutable $birthDate){
         $this->id = $id;
@@ -44,6 +46,15 @@ class Student {
         return $this->birthDate
         ->diff(new DateTimeImmutable) // Diferença com base na data atual
         ->y; // Y = Years
+    }
+
+    public function addPhone(Phone $phone): void {
+        array_push($this->phones, $phone);
+    }
+
+    /** @return Phone[] */
+    public function getPhones(): array {
+        return $this->phones;
     }
 }
 
