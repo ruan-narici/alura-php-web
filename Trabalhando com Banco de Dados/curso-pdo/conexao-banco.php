@@ -14,13 +14,13 @@ echo "Conectei" . PHP_EOL;
 
 $createTableSql = "
 CREATE TABLE IF NOT EXISTS students (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    id INTEGER PRIMARY KEY AUTO_INCREMENT,
     name TEXT NOT NULL,
     birthDate TEXT NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS phones (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    id INTEGER PRIMARY KEY AUTO_INCREMENT,
     area_code TEXT,
     number TEXT,
     student_id INTEGER,

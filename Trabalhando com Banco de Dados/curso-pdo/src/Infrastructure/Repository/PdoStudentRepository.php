@@ -15,21 +15,59 @@ class PdoStudentRepository implements StudentRepository {
         $this->pdo = $pdo;
     }
 
-    private function fillPhoneOf(Student $student): void {
-        $sql = "SELECT * FROM phones WHERE id = :id";
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->bindParam(':id', $student->getId(), PDO::PARAM_INT);
-        $stmt->execute();
-        $phoneDataList = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        foreach( $phoneDataList as $phoneData ) {
+    // private function fillPhoneOf(Student $student): void {
+    //     $sql = "SELECT * FROM phones WHERE id = :id";
+    //     $stmt = $this->pdo->prepare($sql);
+    //     $stmt->bindParam(':id', $student->getId(), PDO::PARAM_INT);
+    //     $stmt->execute();
+    //     $phoneDataList = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    //     foreach( $phoneDataList as $phoneData ) {
+    //         $phone = new Phone(
+    //             $phoneData['id'], 
+    //             $phoneData['area_code'], 
+    //             $phoneData['number']
+    //         );
+
+    //         $student->addPhone($phone);
+    //     }
+    // }
+
+    public function findAllWithPhones(): array {
+        $sql = "
+            SELECT  students.id,
+                    students.name,
+                    students.birthDate,
+                    phones.id AS phone_id,
+                    phones.area_code,
+                    phones.number
+            FROM students
+            JOIN phones
+            ON students.id = phones.student_id
+        ";
+
+        $stmt = $this->pdo->query($sql);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        /**  @var Student[] */
+        $studentList = [];
+        foreach ($result as $row) {
+            if (!array_key_exists($row['id'], $studentList)) {
+                $studentList[$row['id']] = new Student(
+                    $row['id'], 
+                    $row['name'], 
+                    new DateTimeImmutable($row['birthDate'])
+                );
+            }
+
             $phone = new Phone(
-                $phoneData['id'], 
-                $phoneData['area_code'], 
-                $phoneData['number']
+                $row['phone_id'],
+                $row['area_code'],
+                $row['number']
             );
 
-            $student->addPhone($phone);
+            $studentList[$row['id']]->addPhone($phone);
         }
+
+        return $studentList;
     }
 
     public function findAll(): array {
@@ -40,7 +78,7 @@ class PdoStudentRepository implements StudentRepository {
 
         foreach($result as $row) {
             $student = new Student($row['id'], $row['name'], new DateTimeImmutable($row['birthDate']));
-            $this->fillPhoneOf($student);
+            // $this->fillPhoneOf($student);
             array_push($students, $student);
         }
 
