@@ -12,6 +12,7 @@ class Student {
     /** @var Phone[] */
     private array $phones = [];
 
+    
     public function __construct(?int $id, string $name, DateTimeImmutable $birthDate){
         $this->id = $id;
         $this->name = $name;
