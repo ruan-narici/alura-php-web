@@ -19,6 +19,8 @@ class Produto
         $this->tipo = $tipo;
         $this->nome = $nome;
         $this->descricao = $descricao;
+        $this->imagem = $imagem;
+        $this->preco = $preco;
     }
 
     public function getId(): int
@@ -49,5 +51,13 @@ class Produto
     public function getPreco(): float
     {
         return $this->preco;
+    }
+
+    public function getPrecoFormatado(): string {
+        return "R$ " . number_format($this->preco, 2);
+    }
+
+    public function getImagemDiretorio(): string {
+        return "./img/" . $this->imagem;
     }
 }
