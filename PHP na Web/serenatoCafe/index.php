@@ -1,6 +1,7 @@
 <?php
 
     require_once './src/Connection.php';
+    require_once './src/Modelo/Produto.php';
 
     $sql1 = "SELECT * FROM produtos WHERE tipo = 'Café'";
     $statement = $pdo->query($sql1);
