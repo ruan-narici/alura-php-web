@@ -55,6 +55,13 @@ class ProdutoRepositorio {
 
         return $objetoProduto;
     }
+
+    public function excluir(int $id): void {
+        $sql = "DELETE FROM produtos WHERE id = :id";
+        $statement = $this->pdo->prepare($sql);
+        $statement->bindParam("id", $id, PDO::PARAM_INT);
+        $statement->execute();
+    }
 }
 
 ?>
