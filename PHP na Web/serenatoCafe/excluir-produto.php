@@ -6,6 +6,8 @@ require_once './src/Repositorio/ProdutoRepositorio.php';
 
 $produtoRepositorio = new ProdutoRepositorio($pdo);
 
-$produtoRepositorio->excluir($_GET['id']);
+$produtoRepositorio->excluir($_POST['id']);
+
+header('Location: admin.php');
 
 ?>
