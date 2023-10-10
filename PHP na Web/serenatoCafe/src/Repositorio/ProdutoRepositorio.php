@@ -62,6 +62,17 @@ class ProdutoRepositorio {
         $statement->bindParam("id", $id, PDO::PARAM_INT);
         $statement->execute();
     }
+
+    public function salvar(Produto $produto): void {
+        $sql = "INSERT INTO produtos (`tipo`, `nome`, `descricao`, `imagem`, `preco`) VALUES (:tipo, :nome, :descricao, :imagem, :preco)";
+        $statment = $this->pdo->prepare($sql);
+        $statment->bindValue("tipo", $produto->getTipo(), PDO::PARAM_STR);
+        $statment->bindValue("nome", $produto->getNome(), PDO::PARAM_STR);
+        $statment->bindValue("descricao", $produto->getDescricao(), PDO::PARAM_STR);
+        $statment->bindValue("imagem", $produto->getImagem(), PDO::PARAM_STR);
+        $statment->bindValue("preco", $produto->getPreco(), PDO::PARAM_STR);
+        $statment->execute();
+    }
 }
 
 ?>

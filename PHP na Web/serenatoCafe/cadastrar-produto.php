@@ -16,7 +16,10 @@ if (isset($_POST["cadastro"])) {
         // $_POST["imagem"]
     );
 
-    var_dump($produto);
+    // var_dump($produto);
+    $produtoRepositorio->salvar($produto);
+
+    header("Location: admin.php");
 }
 
 ?>
