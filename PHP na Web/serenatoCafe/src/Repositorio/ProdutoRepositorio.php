@@ -49,8 +49,8 @@ class ProdutoRepositorio {
             $produto["tipo"],
             $produto["nome"],
             $produto["descricao"],
-            $produto["imagem"],
-            $produto["preco"]
+            $produto["preco"],
+            $produto["imagem"]
         );
 
         return $objetoProduto;
