@@ -73,6 +73,16 @@ class ProdutoRepositorio {
         $statment->bindValue("preco", $produto->getPreco(), PDO::PARAM_STR);
         $statment->execute();
     }
+
+    public function buscarPorId(int $id): Produto {
+        $sql = "SELECT * FROM produtos WHERE id = :id";
+        $statement = $this->pdo->prepare($sql);
+        $statement->bindValue("id", $id, PDO::PARAM_INT);
+        $statement->execute();
+        $dados = $statement->fetch();
+
+        return $this->criaObjeto($dados);
+    }
 }
 
 ?>
