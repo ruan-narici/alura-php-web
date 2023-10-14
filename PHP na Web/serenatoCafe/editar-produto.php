@@ -6,7 +6,23 @@ require_once './src/Repositorio/ProdutoRepositorio.php';
 
 $produtoRepositorio = new ProdutoRepositorio($pdo);
 
-$produto = $produtoRepositorio->buscarPorId(intval($_GET['id']));
+if (isset($_POST['editar'])) {
+  $preco = str_replace("R$ ", "", $_POST['preco']);
+  $produto = new Produto(
+    $_POST['id'], 
+    $_POST['tipo'], 
+    $_POST['nome'], 
+    $_POST['descricao'], 
+    $preco
+  );
+
+  $produtoRepositorio->atualizar($produto);
+
+  header("Location: admin.php");
+} else {
+  $produto = $produtoRepositorio->buscarPorId(intval($_GET['id']));
+}
+
 ?>
 
 <!doctype html>
@@ -35,7 +51,7 @@ $produto = $produtoRepositorio->buscarPorId(intval($_GET['id']));
     <img class= "ornaments" src="img/ornaments-coffee.png" alt="ornaments">
   </section>
   <section class="container-form">
-    <form action="#">
+    <form method="POST">
 
       <label for="nome">Nome</label>
       <input type="text" id="nome" name="nome" placeholder="Digite o nome do produto" value="<?= $produto->getNome() ?>" required>
@@ -59,7 +75,7 @@ $produto = $produtoRepositorio->buscarPorId(intval($_GET['id']));
 
       <label for="imagem">Envie uma imagem do produto</label>
       <input type="file" name="imagem" accept="image/*" id="imagem" placeholder="Envie uma imagem">
-
+      <input type="hidden" name="id" value ="<?= $produto->getId() ?>">
       <input type="submit" name="editar" class="botao-cadastrar"  value="Editar produto"/>
     </form>
 

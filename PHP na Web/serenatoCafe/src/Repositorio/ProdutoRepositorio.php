@@ -83,6 +83,18 @@ class ProdutoRepositorio {
 
         return $this->criaObjeto($dados);
     }
+
+    public function atualizar(Produto $produto): void {
+        $sql="UPDATE produtos SET tipo=:tipo, nome=:nome, descricao=:descricao, imagem=:imagem, preco=:preco WHERE id=:id";
+        $statement = $this->pdo->prepare($sql);
+        $statement->bindValue("id", $produto->getId(), PDO::PARAM_INT);
+        $statement->bindValue("tipo", $produto->getTipo(), PDO::PARAM_STR);
+        $statement->bindValue("nome", $produto->getNome(), PDO::PARAM_STR);
+        $statement->bindValue("descricao", $produto->getDescricao(), PDO::PARAM_STR);
+        $statement->bindValue("imagem", $produto->getImagem(), PDO::PARAM_STR);
+        $statement->bindValue("preco", $produto->getPreco(), PDO::PARAM_STR);
+        $statement->execute();
+    }
 }
 
 ?>
