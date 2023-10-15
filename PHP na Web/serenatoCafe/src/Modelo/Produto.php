@@ -48,6 +48,10 @@ class Produto
         return $this->imagem;
     }
 
+    public function setImagem(string $imagem): void {
+        $this->imagem = $imagem;
+    }
+
     public function getPreco(): float
     {
         return $this->preco;
