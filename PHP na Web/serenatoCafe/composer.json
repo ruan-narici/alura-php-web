@@ -1,0 +1,13 @@
+{
+    "name": "ruann/serenato-cafe",
+    "description": "Projeto desenvolvido durante o curso de PHP na WEB da Alura",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Ruann\\SerenatoCafe\\": ""
+        }
+    },
+    "require": {
+        "dompdf/dompdf": "^2.0"
+    }
+}
