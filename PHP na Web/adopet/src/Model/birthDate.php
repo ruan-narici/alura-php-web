@@ -34,11 +34,9 @@ class birthDate {
 
         if ($dateTimeNow->sub(new DateInterval("P5Y")) < $dateTime) {
             return false;
-        } else {
-            echo "AAAAAAAAAA";
         }
-        return checkdate( $month, $day, $year);
 
+        return checkdate( $month, $day, $year);
     }
 }
 
