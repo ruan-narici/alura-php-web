@@ -26,7 +26,7 @@ class Cnpj {
     }
 
     public function cleanFormat(string $cnpj): string {
-        return str_replace([".", "/", "-"], "", $cnpj);
+        return str_replace([".", "-", "/"], "", $cnpj);
     }
 
     public function calculateValidDigits(string $cnpj, array $weight): string {
@@ -37,7 +37,7 @@ class Cnpj {
         //1º Passo: Realizar a multiplicação dos dígitos do CNPJ e de uma sequência de pesos associados a cada um deles. 
         //O resultado de cada multiplicação é somado:
         for ($i = 0; $i < $lenghtCnpj; $i++) {
-            $result[$i] = $cnpjArray[$i] * $weight[$i];
+            $result[$i] = intval($cnpjArray[$i]) * $weight[$i];
         }
 
         $sumCnpj = array_sum($result);
@@ -58,7 +58,7 @@ class Cnpj {
     public function validateTwoDigit($cnpj): bool {
         //Preparando o CNPJ com 12 dígitos
         $cleanCnpj = $this->cleanFormat($cnpj);
-        $cnpjWith12FirstDigits = substr($cnpj, 0, 12);
+        $cnpjWith12FirstDigits = substr($cleanCnpj, 0, 12);
 
         // 1º Passo: Calculando o primeiro dígito verificador
         $firstDigitVerificator = $this->calculateValidDigits($cnpjWith12FirstDigits, self::WEIGHT_12);
