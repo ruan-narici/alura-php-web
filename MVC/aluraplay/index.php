@@ -42,7 +42,9 @@ $videoList = $conn->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
     <ul class="videos__container" alt="videos alura">
         <?php foreach ($videoList as $video): ?>
-            <?php if(str_starts_with($video['url'], "http")): ?>
+            <?php if(!str_starts_with($video['url'], "http"))
+                $video["url"] = "https://www.youtube.com/embed/kryIBKPVZ7A?si=OWWrPJ55jLZBa3JV";
+            ?>
                 <li class="videos__item">
                     <iframe width="100%" height="72%" src="<?= $video['url']; ?>"
                         title="YouTube video player" frameborder="0"
@@ -53,11 +55,10 @@ $videoList = $conn->query($sql)->fetchAll(PDO::FETCH_ASSOC);
                         <h3><?= $video['title']; ?></h3>
                         <div class="acoes-video">
                             <a href="./pages/enviar-video.html">Editar</a>
-                            <a href="./pages/enviar-video.html">Excluir</a>
+                            <a href="./remover-video.php?id=<?= $video['id']; ?>">Excluir</a>
                         </div>
                     </div>
                 </li>
-            <?php endif; ?>
         <?php endforeach; ?>
     </ul>
 </body>
