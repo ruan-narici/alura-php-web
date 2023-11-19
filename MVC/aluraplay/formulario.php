@@ -1,4 +1,28 @@
-<!DOCTYPE html>
+<?php
+
+$HOST = "localhost";
+$DBNAME = "alura_play";
+$DBUSER = "root";
+$DBPASS = "root";
+
+$id = filter_input(INPUT_GET, "id", FILTER_VALIDATE_INT);
+$conn = new PDO("mysql:host=$HOST;dbname=$DBNAME", $DBUSER, $DBPASS);
+$video;
+
+if($id !== false) {
+    $sql = "
+        SELECT * 
+            FROM videos 
+        WHERE id = $id
+    ";
+
+    $video = $conn->query($sql)->fetch(PDO::FETCH_ASSOC);
+} else {
+    header("Location: /index.php?sucesso=0");
+    exit();
+}
+
+?><!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
@@ -32,21 +56,22 @@
 
     <main class="container">
 
-        <form class="container__formulario" method="POST" action="../novo-video.php">
-            <h3 class="formulario__titulo">Envie um vídeo!</h3>
+        <form class="container__formulario" method="POST" action="./editar-video.php">
+            <h3 class="formulario__titulo">Edite o vídeo!</h3>
                 <div class="formulario__campo">
                     <label class="campo__etiqueta" for="url">Link embed</label>
                     <input name="url" class="campo__escrita" required
-                        placeholder="Por exemplo: https://www.youtube.com/embed/FAY1K2aUg5g" id='url' />
+                        placeholder="Por exemplo: https://www.youtube.com/embed/FAY1K2aUg5g" id='url' 
+                        value="<?= $video['url']; ?>"/>
                 </div>
 
 
                 <div class="formulario__campo">
                     <label class="campo__etiqueta" for="titulo">Titulo do vídeo</label>
                     <input name="titulo" class="campo__escrita" required placeholder="Neste campo, dê o nome do vídeo"
-                        id='titulo' />
+                        id='titulo' value="<?= $video['title']; ?>"/>
                 </div>
-
+                <input type="hidden" name="id" value="<?= $video['id']; ?>"/>
                 <input class="formulario__botao" type="submit" value="Enviar" />
         </form>
 
