@@ -17,6 +17,10 @@ $stmt = $conn->prepare($sql);
 $stmt->bindValue(":url", $_POST['url']);
 $stmt->bindValue(":title", $_POST['titulo']);
 
-var_dump($stmt->execute());
+if ($stmt->execute()) {
+    header("Location: /index.php?sucesso=1");
+} else {
+    header("Location: /index.php?sucesso=0");
+}
 
 ?>
