@@ -8,7 +8,7 @@ $DBPASS = "root";
 $id = filter_input(INPUT_GET, "id", FILTER_SANITIZE_NUMBER_INT);
 
 if ($id == false) {
-    header("Location: /index.php?sucesso=0");
+    header("Location: /?sucesso=0");
     exit();
 }
 
@@ -23,9 +23,9 @@ $stmt = $conn->prepare($sql);
 $stmt->bindValue(":id", $id, PDO::PARAM_INT);
 
 if ($stmt->execute()) {
-    header("Location: /index.php?sucesso=1");
+    header("Location: /?sucesso=1");
 } else {
-    header("Location: /index.php?sucesso=0");
+    header("Location: /?sucesso=0");
 }
 
 ?>

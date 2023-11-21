@@ -18,7 +18,7 @@ if($id !== false) {
 
     $video = $conn->query($sql)->fetch(PDO::FETCH_ASSOC);
 } else {
-    header("Location: /index.php?sucesso=0");
+    header("Location: /?sucesso=0");
     exit();
 }
 
@@ -44,10 +44,10 @@ if($id !== false) {
     <header>
 
         <nav class="cabecalho">
-            <a class="logo" href="../index.php"></a>
+            <a class="logo" href="../"></a>
 
             <div class="cabecalho__icones">
-                <a href="./enviar-video.html" class="cabecalho__videos"></a>
+                <a href="./novo-video" class="cabecalho__videos"></a>
                 <a href="../pages/login.html" class="cabecalho__sair">Sair</a>
             </div>
         </nav>
@@ -56,7 +56,7 @@ if($id !== false) {
 
     <main class="container">
 
-        <form class="container__formulario" method="POST" action="./editar-video.php">
+        <form class="container__formulario" method="POST" action="/editar-video">
             <h3 class="formulario__titulo">Edite o vídeo!</h3>
                 <div class="formulario__campo">
                     <label class="campo__etiqueta" for="url">Link embed</label>
