@@ -1,4 +1,5 @@
 <?php
+use Alura\Mvc\Repository\VideoRepository;
 
 $HOST = "localhost";
 $DBNAME = "alura_play";
@@ -14,15 +15,10 @@ if ($id == false) {
 
 $conn = new PDO("mysql:host=$HOST;dbname=$DBNAME", $DBUSER, $DBPASS);
 
-$sql = "
-    DELETE FROM videos 
-        WHERE id = :id
-";
+$videoRepository = new VideoRepository($conn);
 
-$stmt = $conn->prepare($sql);
-$stmt->bindValue(":id", $id, PDO::PARAM_INT);
 
-if ($stmt->execute()) {
+if ($videoRepository->remove($id)) {
     header("Location: /?sucesso=1");
 } else {
     header("Location: /?sucesso=0");
