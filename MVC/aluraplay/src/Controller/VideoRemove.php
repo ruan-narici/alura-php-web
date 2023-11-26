@@ -4,7 +4,7 @@ namespace Alura\Mvc\Controller;
 
 use Alura\Mvc\Repository\VideoRepository;
 
-class VideoRemove {
+class VideoRemove implements Controller{
     public function __construct(private VideoRepository $videoRepository) {
     }
 

@@ -3,9 +3,8 @@
 namespace Alura\Mvc\Controller;
 
 use Alura\Mvc\Repository\VideoRepository;
-use PDO;
 
-class VideoList {
+class VideoList implements Controller{
 
     public function __construct(private VideoRepository $videoRepository) {
     }
