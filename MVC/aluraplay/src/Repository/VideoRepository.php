@@ -66,6 +66,20 @@ class VideoRepository {
                 return $video;
             }, $videoList);
     }
+
+    public function findById(int $id): Video {
+        $sql = "SELECT * FROM videos WHERE id = :id";
+
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(":id", $id, PDO::PARAM_INT);
+        $stmt->execute();
+
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+        $video = new Video($result["url"], $result["title"]);
+        $video->setId($result["id"]);
+        return $video;
+    }
 }
 
 
