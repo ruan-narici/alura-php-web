@@ -19,7 +19,6 @@ class VideoUpdate implements Controller{
             header("Location: /?sucesso=0");
             exit();
         }
-
         $video = new Video($url, $titulo);
         $video->setId($id);
 
