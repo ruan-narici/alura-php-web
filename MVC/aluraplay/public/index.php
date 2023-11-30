@@ -2,6 +2,7 @@
 
 declare(strict_types= 1);
 
+use Alura\Mvc\Controller\VideoError404;
 use Alura\Mvc\Repository\VideoRepository;
 
 require_once __DIR__ . "/../vendor/autoload.php";
@@ -18,9 +19,13 @@ $videoRepository = new VideoRepository($conn);
 $pathInfo = $_SERVER['PATH_INFO'] ?? "/";
 $requestMethod = $_SERVER['REQUEST_METHOD'];
 
-$routeClass = $routes[$requestMethod . "|" . $pathInfo];
-
-$controller = new $routeClass($videoRepository);
+if (array_key_exists($requestMethod . "|" . $pathInfo, $routes)) {
+    $routeClass = $routes[$requestMethod . "|" . $pathInfo];
+    
+    $controller = new $routeClass($videoRepository);
+} else {
+    $controller = new VideoError404();
+}
 
 $controller->dataProcess();
 
