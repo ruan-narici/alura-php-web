@@ -6,7 +6,7 @@ use Alura\Mvc\Controller\Controller;
 class LoginFormController implements Controller {
 
     public function dataProcess() {
-        if ($_SESSION["logado"] == true) {
+        if (array_key_exists("logado", $_SESSION)) {
             header("Location: /");
             return;
         }
