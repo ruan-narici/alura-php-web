@@ -10,13 +10,8 @@ class VideoList implements Controller{
     }
 
     public function dataProcess(): void {
-        session_start();
-        if (array_key_exists("logado", $_SESSION)) {
-            $videoList = $this->videoRepository->all();
-            require_once __DIR__ . "/../../views/video-list.php";
-        } else {
-            header("Location: /login");
-        }
+        $videoList = $this->videoRepository->all();
+        require_once __DIR__ . "/../../views/video-list.php";
     }
 }
 

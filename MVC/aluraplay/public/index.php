@@ -19,6 +19,12 @@ $videoRepository = new VideoRepository($conn);
 $pathInfo = $_SERVER['PATH_INFO'] ?? "/";
 $requestMethod = $_SERVER['REQUEST_METHOD'];
 
+$isLogin = $pathInfo === "/login";
+session_start();
+if (!array_key_exists("logado", $_SESSION) && !$isLogin) {
+    header("Location: /login");
+}
+
 if (array_key_exists($requestMethod . "|" . $pathInfo, $routes)) {
     $routeClass = $routes[$requestMethod . "|" . $pathInfo];
     
