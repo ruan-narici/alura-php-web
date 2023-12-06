@@ -25,6 +25,7 @@ if (!array_key_exists("logado", $_SESSION) && !$isLogin) {
     header("Location: /login");
 }
 
+
 if (array_key_exists($requestMethod . "|" . $pathInfo, $routes)) {
     $routeClass = $routes[$requestMethod . "|" . $pathInfo];
     
