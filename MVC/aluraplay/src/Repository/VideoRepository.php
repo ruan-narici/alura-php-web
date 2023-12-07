@@ -13,13 +13,14 @@ class VideoRepository {
 
     public function add(Video $video): bool {
         $sql = "
-        INSERT INTO videos (url, title) 
-            VALUES (:url, :title);
+        INSERT INTO videos (url, title, image_path) 
+            VALUES (:url, :title, :image);
         ";
 
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(":url", $video->url);
         $stmt->bindValue(":title", $video->title);
+        $stmt->bindValue(":image", $video->getFilePath());
         $result = $stmt->execute();
 
         $video->setId($this->pdo->lastInsertId());
@@ -40,7 +41,7 @@ class VideoRepository {
     public function update(Video $video): bool {
         $sql = "
             UPDATE videos 
-                SET url = :url, title = :title
+                SET url = :url, title = :title, image_path = :image
             WHERE id = :id
         ";
 
@@ -48,6 +49,7 @@ class VideoRepository {
         $stmt->bindValue(":url", $video->url, PDO::PARAM_STR);
         $stmt->bindValue(":title", $video->title, PDO::PARAM_STR);
         $stmt->bindValue(":id", $video->id, PDO::PARAM_INT);
+        $stmt->bindValue(":image", $video->getFilePath());
         return $stmt->execute();
     }
 

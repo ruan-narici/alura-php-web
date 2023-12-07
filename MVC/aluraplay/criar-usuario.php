@@ -7,8 +7,8 @@ $PASSWORD = "root";
 
 $conn = new PDO("mysql:host=$HOST;dbname=$DBNAME", $USER, $PASSWORD);
 
-$emailAccount = "saopdkasp@hotmail.com";
-$passwordAccount = password_hash("123456", PASSWORD_ARGON2I);
+$emailAccount = "exemplo@exemplo.com";
+$passwordAccount = password_hash("123", PASSWORD_ARGON2I);
 
 $sql = "
     INSERT INTO users (email, password) 

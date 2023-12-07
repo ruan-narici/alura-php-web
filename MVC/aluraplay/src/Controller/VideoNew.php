@@ -22,7 +22,14 @@ class VideoNew implements Controller{
             exit();
         }
 
-        if ($this->videoRepository->add(new Video($url, $title))) {
+        $video = new Video($url, $title);
+        if ($_FILES["imagem"]["error"] == UPLOAD_ERR_OK) {
+            $newImagePath = __DIR__ . "/../../public/img/upload/" . $_FILES["imagem"]["name"];
+            move_uploaded_file($_FILES["imagem"]["tmp_name"], $newImagePath);
+            $video->setFilePath($newImagePath);
+        }
+
+        if ($this->videoRepository->add($video)) {
             header("Location: /?sucesso=1");
         } else {
             header("Location: /?sucesso=0");

@@ -20,6 +20,11 @@ class VideoUpdate implements Controller{
             exit();
         }
         $video = new Video($url, $titulo);
+        if ($_FILES["imagem"]["error"] == UPLOAD_ERR_OK) {
+            $newImagePath = __DIR__ . "/../../public/img/upload/" . $_FILES["imagem"]["name"];
+            move_uploaded_file($_FILES["imagem"]["tmp_name"], $newImagePath);
+            $video->setFilePath($newImagePath);
+        }
         $video->setId($id);
 
         if ($this->videoRepository->update($video)) {
