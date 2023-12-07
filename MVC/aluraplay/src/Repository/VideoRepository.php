@@ -41,7 +41,7 @@ class VideoRepository {
     public function update(Video $video): bool {
         $sql = "
             UPDATE videos 
-                SET url = :url, title = :title, image_path = :image
+                SET url = :url, title = :title , image_path =  :image
             WHERE id = :id
         ";
 
@@ -49,7 +49,7 @@ class VideoRepository {
         $stmt->bindValue(":url", $video->url, PDO::PARAM_STR);
         $stmt->bindValue(":title", $video->title, PDO::PARAM_STR);
         $stmt->bindValue(":id", $video->id, PDO::PARAM_INT);
-        $stmt->bindValue(":image", $video->getFilePath());
+        $stmt->bindValue(":image", $video->getFilePath(), PDO::PARAM_STR);
         return $stmt->execute();
     }
 
@@ -64,7 +64,8 @@ class VideoRepository {
         return array_map(
             function ($videoData) {
                 $video = new Video($videoData["url"], $videoData["title"]);
-                $video->setId($videoData["id"]) ;
+                $video->setId($videoData["id"]);
+                $video->setFilePath($videoData["image_path"]);
                 return $video;
             }, $videoList);
     }
@@ -80,6 +81,7 @@ class VideoRepository {
         
         $video = new Video($result["url"], $result["title"]);
         $video->setId($result["id"]);
+        $video->setFilePath($result["image_path"]);
         return $video;
     }
 }

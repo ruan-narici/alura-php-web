@@ -26,7 +26,7 @@ class VideoNew implements Controller{
         if ($_FILES["imagem"]["error"] == UPLOAD_ERR_OK) {
             $newImagePath = __DIR__ . "/../../public/img/upload/" . $_FILES["imagem"]["name"];
             move_uploaded_file($_FILES["imagem"]["tmp_name"], $newImagePath);
-            $video->setFilePath($newImagePath);
+            $video->setFilePath($_FILES["imagem"]["name"]);
         }
 
         if ($this->videoRepository->add($video)) {
