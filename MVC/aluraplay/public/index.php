@@ -21,7 +21,12 @@ $requestMethod = $_SERVER['REQUEST_METHOD'];
 
 $isLogin = $pathInfo === "/login";
 session_start();
-session_regenerate_id();
+if (isset($_SESSION['logado'])) {
+    $originalInfo = $_SESSION['logado'];
+    unset($_SESSION['logado']);
+    session_regenerate_id();
+    $_SESSION['logado'] = $originalInfo;
+}
 if (!array_key_exists("logado", $_SESSION) && !$isLogin) {
     header("Location: /login");
 }
