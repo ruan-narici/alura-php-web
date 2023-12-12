@@ -6,6 +6,7 @@ use Alura\Mvc\Controller\LogoutController;
 use Alura\Mvc\Controller\VideoForm;
 use Alura\Mvc\Controller\VideoFormUpdate;
 use Alura\Mvc\Controller\VideoList;
+use Alura\Mvc\Controller\VideoListJsonController;
 use Alura\Mvc\Controller\VideoNew;
 use Alura\Mvc\Controller\VideoRemove;
 use Alura\Mvc\Controller\VideoUpdate;
@@ -19,7 +20,8 @@ $routes = [
     "GET|/remover-video" => VideoRemove::class,
     "GET|/login" => LoginFormController::class,
     "POST|/login" => LoginController::class,
-    "GET|/logout" => LogoutController::class
+    "GET|/logout" => LogoutController::class,
+    "GET|/video-list-json" => VideoListJsonController::class
 ];
 
 ?>
