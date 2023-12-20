@@ -23,5 +23,11 @@
                 </nav>
             </header>
 
-            <h2 class="formulario__titulo erro">ERRO</h2>
-            
+            <h2 class="formulario__titulo erro">
+                <?php
+                    if (isset($_SESSION["error_message"])) {
+                        echo $_SESSION["error_message"];
+                        unset($_SESSION["error_message"]);
+                    }
+                ?>
+            </h2>
