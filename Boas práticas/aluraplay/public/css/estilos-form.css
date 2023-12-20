@@ -2,7 +2,6 @@
     display: grid;
     align-items: center;
     justify-content: center;
-    height: 100vh;
 }
 
 .container__formulario {
@@ -23,6 +22,11 @@
     color: var(--azul-medio);
     font-weight: bold;
     font-size: 21px;
+}
+
+.formulario__titulo.erro {
+    color: red;
+    margin-top: 2rem;
 }
 
 .campo__escrita {

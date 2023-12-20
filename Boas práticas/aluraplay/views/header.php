@@ -22,3 +22,6 @@
                     </div>
                 </nav>
             </header>
+
+            <h2 class="formulario__titulo erro">ERRO</h2>
+            
