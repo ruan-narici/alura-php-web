@@ -6,9 +6,13 @@ use Alura\Mvc\Controller\{
     Controller,
     ControllerWithHtml
 };
+use Alura\Mvc\Helper\FlashMessageTrait;
 use Alura\Mvc\Repository\VideoRepository;
 
 class VideoFormUpdate extends ControllerWithHtml implements Controller{
+
+    use FlashMessageTrait;
+
     public function __construct(private VideoRepository $videoRepository) {
     }
 
@@ -19,7 +23,8 @@ class VideoFormUpdate extends ControllerWithHtml implements Controller{
         if($id !== false) {
             $video = $this->videoRepository->findById($id);
         } else {
-            header("Location: /?sucesso=0");
+            $this->addErroMessage("ID de vídeo inválido!");
+            header("Location: /");
             exit();
         }
         $this->renderTemplate("video-form-update", ["video" => $video]);
