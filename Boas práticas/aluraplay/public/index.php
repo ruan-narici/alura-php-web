@@ -16,6 +16,7 @@ $conn = new PDO("mysql:host=$HOST;dbname=$DBNAME", $DBUSER, $DBPASS);
 
 $videoRepository = new VideoRepository($conn);
 
+
 $pathInfo = $_SERVER['PATH_INFO'] ?? "/";
 $requestMethod = $_SERVER['REQUEST_METHOD'];
 
