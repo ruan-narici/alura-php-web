@@ -9,6 +9,7 @@ class VideoRemove implements Controller{
 
     use FlashMessageTrait;
 
+    
     public function __construct(private VideoRepository $videoRepository) {
     }
 
